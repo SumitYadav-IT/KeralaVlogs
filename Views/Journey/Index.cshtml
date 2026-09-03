@@ -1,0 +1,58 @@
+﻿@model List<KerlaVlogs.Models.Destination>
+
+@{
+    ViewData["Title"] = "My Journey";
+}
+
+<div class="container mt-5">
+
+    <div class="text-center mb-5">
+
+        <h1>My Kerala Journey</h1>
+
+        <p class="lead">
+            A journey through the beautiful places of Kerala.
+        </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        @foreach (var destination in Model)
+        {
+            <div class="col-md-4">
+
+                <div class="card destination-card">
+
+                    <img src="@destination.Image"
+                         class="card-img-top"
+                         alt="@destination.Name">
+
+                    <div class="card-body">
+
+                        <h3>@destination.Name</h3>
+
+                        <p>
+                            @destination.Description
+                        </p>
+
+                        <a asp-controller="Journey"
+                           asp-action="Details"
+                           asp-route-id="@destination.Id"
+                           class="btn btn-primary">
+
+                            Explore
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>

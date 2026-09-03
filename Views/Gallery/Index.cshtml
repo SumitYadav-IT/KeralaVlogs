@@ -1,0 +1,155 @@
+﻿@model List<KerlaVlogs.Models.Gallery>
+
+@{
+    ViewData["Title"] = "Gallery";
+}
+
+<div class="container mt-5 mb-5">
+
+    <!-- Header -->
+
+    <div class="text-center mb-5">
+
+        <h1 class="display-5 fw-bold">
+            📸 @ViewBag.Title
+        </h1>
+
+        <p class="lead text-muted">
+            @ViewBag.Subtitle
+        </p>
+
+    </div>
+
+
+    @if (Model.Count == 0)
+    {
+        <div class="text-center py-5">
+
+            <h3>📷 No Photos Yet</h3>
+
+            <p class="text-muted">
+                Your Kerala memories will appear here.
+            </p>
+
+            <a asp-controller="Admin"
+               asp-action="AddPhoto"
+               class="btn btn-primary">
+                + Add First Photo
+            </a>
+
+        </div>
+    }
+    else
+    {
+        <!-- Photo Grid -->
+
+        <div class="row g-4">
+
+            @foreach (var photo in Model)
+            {
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="card shadow-sm border-0 h-100 gallery-card">
+
+                        <div class="gallery-image-wrapper">
+
+                            <img src="@photo.ImagePath"
+                                 class="gallery-main-image"
+                                 alt="@photo.Caption"
+                                 onclick="openLightbox('@photo.ImagePath', '@photo.Caption')" />
+
+                        </div>
+
+                        <div class="card-body">
+
+                            @if (photo.Itinerary != null)
+                            {
+                                <span class="badge bg-primary mb-2">
+                                    DAY @photo.Itinerary.DayNumber
+                                </span>
+
+                                <h5 class="fw-bold">
+                                    @photo.Itinerary.Title
+                                </h5>
+                            }
+
+                            @if (!string.IsNullOrWhiteSpace(photo.Caption))
+                            {
+                                <p class="text-muted mb-0">
+                                    @photo.Caption
+                                </p>
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+
+
+    <!-- Bottom Buttons -->
+
+    <div class="text-center mt-5">
+
+        <a asp-controller="Journey"
+           asp-action="Itinerary"
+           class="btn btn-secondary">
+            ← Back to Itinerary
+        </a>
+
+        <a asp-controller="Admin"
+           asp-action="AddPhoto"
+           class="btn btn-primary ms-2">
+            📸 Add Photo
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- LIGHTBOX -->
+
+<div id="imageLightbox"
+     class="image-lightbox"
+     onclick="closeLightbox()">
+
+    <span class="lightbox-close">
+        &times;
+    </span>
+
+    <img id="lightboxImage"
+         src=""
+         alt="" />
+
+    <p id="lightboxCaption"></p>
+
+</div>
+
+
+<script>
+
+    function openLightbox(imagePath, caption) {
+
+        document.getElementById("lightboxImage").src = imagePath;
+
+        document.getElementById("lightboxCaption").innerText = caption;
+
+        document
+            .getElementById("imageLightbox")
+            .classList.add("show");
+    }
+
+
+    function closeLightbox() {
+
+        document
+            .getElementById("imageLightbox")
+            .classList.remove("show");
+    }
+
+</script>

@@ -1,0 +1,72 @@
+﻿@model List<KerlaVlogs.Models.Destination>
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h1>Admin Dashboard</h1>
+
+       <a asp-action="Create" class="btn btn-success">
+    + Add Destination
+</a>
+
+<a asp-action="AddPhoto" class="btn btn-primary">
+    📸 Add Photo
+</a>
+
+<a asp-action="Photos" class="btn btn-dark">
+    🖼️ Manage Photos
+</a>
+
+
+    </div>
+
+    <table class="table table-bordered table-hover">
+
+        <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var destination in Model)
+            {
+                <tr>
+
+                    <td>@destination.Id</td>
+
+                    <td>@destination.Name</td>
+
+                    <td>@destination.Location</td>
+
+                    <td>
+                        <a asp-action="Edit"
+                           asp-route-id="@destination.Id"
+                           class="btn btn-warning btn-sm">
+                            Edit
+                        </a>
+
+                        <a asp-action="Delete"
+                           asp-route-id="@destination.Id"
+                           class="btn btn-danger btn-sm">
+                            Delete
+                        </a>
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>

@@ -1,0 +1,132 @@
+﻿@model List<KerlaVlogs.Models.Itinerary>
+
+@{
+    ViewData["Title"] = "My Kerala Journey";
+
+    var photos = ViewBag.Photos as List<KerlaVlogs.Models.Gallery>
+                  ?? new List<KerlaVlogs.Models.Gallery>();
+}
+
+<div class="container mt-5 mb-5">
+
+    <!-- Header -->
+
+    <div class="text-center mb-5">
+
+        <h1 class="display-4 fw-bold">
+            My Kerala Journey
+        </h1>
+
+        <p class="lead text-muted">
+            7 Days • Countless Memories • One Incredible Journey
+        </p>
+
+    </div>
+
+
+    <!-- Timeline -->
+
+    <div class="timeline">
+
+        @foreach (var day in Model)
+        {
+            var dayPhotos = photos
+                .Where(x => x.ItineraryId == day.Id)
+                .ToList();
+
+            <div class="timeline-item">
+
+                <!-- Day Number -->
+
+                <div class="timeline-number">
+                    @day.DayNumber
+                </div>
+
+
+                <!-- Day Content -->
+
+                <div class="timeline-content">
+
+                    <div class="card shadow-sm border-0">
+
+                        <div class="card-body p-4">
+
+                            <span class="badge bg-primary mb-3">
+                                DAY @day.DayNumber
+                            </span>
+
+                            <h2 class="fw-bold">
+                                @day.Title
+                            </h2>
+
+                            <h6 class="text-muted mt-3">
+                                📍 @day.Location
+                            </h6>
+
+                            <hr />
+
+                            <p class="mt-3">
+                                @day.Description
+                            </p>
+
+
+                            <!-- Photos -->
+                            @if (dayPhotos.Count > 0)
+                            {
+                                <h5 class="mt-4 mb-3">
+                                    📸 Memories from Day @day.DayNumber
+                                </h5>
+
+                                <div class="row g-3">
+
+                                    @foreach (var photo in dayPhotos)
+                                    {
+                                        <div class="col-md-4">
+
+                                            <div class="journey-photo">
+
+                                                <img src="@photo.ImagePath"
+                                                     class="img-fluid"
+                                                     alt="@photo.Caption">
+
+                                                @if (!string.IsNullOrEmpty(photo.Caption))
+                                                {
+                                                    <p class="photo-caption">
+                                                        @photo.Caption
+                                                    </p>
+                                                }
+
+                                            </div>
+
+
+                                            <div class="mt-4">
+
+                                                <a asp-controller="Gallery"
+                                                   asp-action="Index"
+                                                   asp-route-itineraryId="@day.Id"
+                                                   class="btn btn-primary">
+
+                                                    📸 View Day @day.DayNumber Photos
+
+                                                </a>
+
+                                            </div>
+
+                                        </div>
+                                    }
+
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>

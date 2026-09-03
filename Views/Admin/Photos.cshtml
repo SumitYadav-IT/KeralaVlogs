@@ -1,0 +1,107 @@
+﻿@model List<KerlaVlogs.Models.Gallery>
+
+@{
+    ViewData["Title"] = "Manage Photos";
+}
+
+<div class="container mt-5 mb-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h1>📸 Manage Photos</h1>
+
+            <p class="text-muted">
+                Manage all photos from your Kerala journey.
+            </p>
+        </div>
+
+        <a asp-action="AddPhoto"
+           class="btn btn-success">
+            + Add Photo
+        </a>
+
+    </div>
+
+
+    @if (Model.Count == 0)
+    {
+        <div class="text-center py-5">
+
+            <h3>No photos uploaded.</h3>
+
+            <a asp-action="AddPhoto"
+               class="btn btn-primary mt-3">
+                Upload Photo
+            </a>
+
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+
+            @foreach (var photo in Model)
+            {
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="card shadow-sm border-0">
+
+                        <img src="@photo.ImagePath"
+                             class="card-img-top admin-photo"
+                             alt="@photo.Caption" />
+
+                        <div class="card-body">
+
+                            @if (photo.Itinerary != null)
+                            {
+                                <span class="badge bg-primary mb-2">
+                                    DAY @photo.Itinerary.DayNumber
+                                </span>
+
+                                <h5>
+                                    @photo.Itinerary.Title
+                                </h5>
+                            }
+
+                            <p class="text-muted">
+                                @photo.Caption
+                            </p>
+
+
+                            <form asp-action="DeletePhoto"
+                                  method="post"
+                                  onsubmit="return confirm('Are you sure you want to delete this photo?');">
+
+                                <input type="hidden"
+                                       name="id"
+                                       value="@photo.Id" />
+
+                                <button type="submit"
+                                        class="btn btn-danger btn-sm">
+                                    🗑️ Delete Photo
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+
+
+    <div class="mt-5">
+
+        <a asp-action="Index"
+           class="btn btn-secondary">
+            ← Back to Admin
+        </a>
+
+    </div>
+
+</div>

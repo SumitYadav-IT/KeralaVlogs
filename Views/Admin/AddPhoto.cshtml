@@ -1,0 +1,107 @@
+﻿@model KerlaVlogs.Models.Gallery
+
+@{
+    ViewData["Title"] = "Add Photo";
+}
+
+<div class="container mt-5">
+
+    <div class="text-center mb-4">
+        <h1>📸 Add Journey Photo</h1>
+        <p class="text-muted">
+            Upload photos and assign them to a specific day of your Kerala journey.
+        </p>
+    </div>
+
+    <div class="card shadow-sm mx-auto" style="max-width: 700px;">
+
+        <div class="card-body p-4">
+
+            <form asp-action="AddPhoto"
+                  method="post"
+                  enctype="multipart/form-data">
+
+                <!-- Select Day -->
+
+                <div class="mb-4">
+
+                    <label class="form-label fw-bold">
+                        Select Day
+                    </label>
+
+                    <select name="ItineraryId"
+                            class="form-select"
+                            required>
+
+                        <option value="">
+                            -- Select Journey Day --
+                        </option>
+
+                        @foreach (var day in ViewBag.Itinerary)
+                        {
+                            <option value="@day.Id">
+                                Day @day.DayNumber - @day.Title
+                            </option>
+                        }
+
+                    </select>
+
+                </div>
+
+
+                <!-- Select Photo -->
+
+                <div class="mb-4">
+
+                    <label class="form-label fw-bold">
+                        Select Photo
+                    </label>
+
+                    <input type="file"
+                           name="photo"
+                           class="form-control"
+                           accept="image/*"
+                           required />
+
+                </div>
+
+
+                <!-- Caption -->
+
+                <div class="mb-4">
+
+                    <label asp-for="Caption"
+                           class="form-label fw-bold">
+                        Caption
+                    </label>
+
+                    <input asp-for="Caption"
+                           class="form-control"
+                           placeholder="Beautiful tea gardens of Munnar" />
+
+                </div>
+
+
+                <!-- Buttons -->
+
+                <div class="d-flex gap-2">
+
+                    <button type="submit"
+                            class="btn btn-success">
+                        ⬆ Upload Photo
+                    </button>
+
+                    <a asp-action="Index"
+                       class="btn btn-secondary">
+                        ← Back
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

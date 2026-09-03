@@ -1,0 +1,476 @@
+﻿@using KerlaVlogs.Models
+
+@{
+    ViewData["Title"] = "Kerala Journey";
+
+    var destinations = ViewBag.Destinations as List<Destination>
+                        ?? new List<Destination>();
+
+    var itinerary = ViewBag.Itinerary as List<Itinerary>
+                     ?? new List<Itinerary>();
+}
+
+
+<!-- =========================
+     HERO SECTION
+     ========================= -->
+
+<section class="kerala-hero">
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+
+        <span class="hero-tag">
+            🌴 MY KERALA TRAVEL STORY
+        </span>
+
+        <h1>
+            7 Days.
+            <span>One Incredible Journey.</span>
+        </h1>
+
+        <p>
+            From the misty mountains of Munnar to the peaceful
+            backwaters of Alleppey and the beautiful beaches of
+            Kerala — this is the story of an unforgettable journey.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a asp-controller="Journey"
+               asp-action="Itinerary"
+               class="hero-btn primary-btn">
+                🗓️ Explore Journey
+            </a>
+
+            <a asp-controller="Gallery"
+               asp-action="Index"
+               class="hero-btn secondary-btn">
+                📸 View Gallery
+            </a>
+
+        </div>
+
+        <div class="scroll-down">
+            ↓ Scroll to explore
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     INTRODUCTION
+     ========================= -->
+
+<section class="story-section">
+
+    <div class="container">
+
+        <div class="story-grid">
+
+            <div class="story-text">
+
+                <span class="section-label">
+                    OUR STORY
+                </span>
+
+                <h2>
+                    More than a trip,
+                    <span>it was a memory.</span>
+                </h2>
+
+                <p>
+                    Six friends, seven days and one beautiful destination —
+                    Kerala.
+                </p>
+
+                <p>
+                    Starting from Mumbai, we travelled through Kochi,
+                    Munnar, Thekkady, Alleppey and Trivandrum.
+                    Every place had something different to offer —
+                    mountains, forests, rivers, beaches and unforgettable
+                    moments.
+                </p>
+
+                <a asp-controller="Journey"
+                   asp-action="Itinerary"
+                   class="text-link">
+                    Read our complete story →
+                </a>
+
+            </div>
+
+
+            <div class="story-stats">
+
+                <div class="stat-card">
+                    <strong>7</strong>
+                    <span>Days</span>
+                </div>
+
+                <div class="stat-card">
+                    <strong>6</strong>
+                    <span>Friends</span>
+                </div>
+
+                <div class="stat-card">
+                    <strong>5+</strong>
+                    <span>Destinations</span>
+                </div>
+
+                <div class="stat-card">
+                    <strong>∞</strong>
+                    <span>Memories</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     7 DAYS JOURNEY
+     ========================= -->
+
+<section class="days-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                THE JOURNEY
+            </span>
+
+            <h2>
+                Seven Days in Kerala
+            </h2>
+
+            <p>
+                Every day brought a new destination,
+                a new experience and a new memory.
+            </p>
+
+        </div>
+
+
+        <div class="days-grid">
+
+            @foreach (var day in itinerary)
+            {
+                <a asp-controller="Journey"
+                   asp-action="Itinerary"
+                   class="day-card">
+
+                    <div class="day-number">
+                        @day.DayNumber.ToString("00")
+                    </div>
+
+                    <div class="day-info">
+
+                        <span>
+                            DAY @day.DayNumber
+                        </span>
+
+                        <h3>
+                            @day.Title
+                        </h3>
+
+                        <p>
+                            @day.Location
+                        </p>
+
+                    </div>
+
+                    <div class="day-arrow">
+                        →
+                    </div>
+
+                </a>
+            }
+
+        </div>
+
+
+        <div class="center-button">
+
+            <a asp-controller="Journey"
+               asp-action="Itinerary"
+               class="main-btn">
+                Explore All 7 Days →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FEATURED MEMORIES
+     ========================= -->
+
+<section class="memories-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                MEMORIES
+            </span>
+
+            <h2>
+                Moments We Captured
+            </h2>
+
+            <p>
+                A few glimpses from our Kerala adventure.
+            </p>
+
+        </div>
+
+
+        <div class="memory-grid">
+
+            <div class="memory-card large">
+
+                <img src="/images/munnar.jpeg"
+                     alt="Munnar Kerala"
+                     onerror="this.style.display='none';">
+
+                <div class="memory-overlay">
+                    <span>Munnar</span>
+                    <h3>Misty Mountains</h3>
+                </div>
+
+            </div>
+
+
+            <div class="memory-card">
+
+                <img src="/images/alleppey.jpeg"
+                     alt="Alleppey Kerala"
+                     onerror="this.style.display='none';">
+
+                <div class="memory-overlay">
+                    <span>Alleppey</span>
+                    <h3>Peaceful Backwaters</h3>
+                </div>
+
+            </div>
+
+
+            <div class="memory-card">
+
+                <img src="/images/varkala.jpeg"
+                     alt="Varkala Kerala"
+                     onerror="this.style.display='none';">
+
+                <div class="memory-overlay">
+                    <span>Kerala</span>
+                    <h3>Beautiful Beaches</h3>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="center-button">
+
+            <a asp-controller="Gallery"
+               asp-action="Index"
+               class="main-btn">
+                📸 See All Memories
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     VIDEO SECTION
+     ========================= -->
+
+<section class="video-section">
+
+    <div class="container">
+
+        <div class="video-content">
+
+            <span class="section-label">
+                WATCH THE JOURNEY
+            </span>
+
+            <h2>
+                Relive the Adventure
+            </h2>
+
+            <p>
+                Our Kerala journey wasn't just about the places
+                we visited. It was about the people, the laughter,
+                the unexpected moments and the memories we created.
+            </p>
+
+
+            <div class="video-box">
+
+                <video controls
+                       poster="/images/munnar.jpeg">
+
+                    <source src="/videos/kerala-trip.mp4"
+                            type="video/mp4">
+
+                    Your browser does not support video playback.
+
+                </video>
+
+                <div class="video-placeholder">
+
+                    <div class="play-icon">
+                        ▶
+                    </div>
+
+                    <h3>
+                        Kerala Trip
+                    </h3>
+
+                    <p>
+                        Add your Kerala trip video as
+                        <strong>wwwroot/videos/kerala-trip.mp4</strong>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     DESTINATIONS
+     ========================= -->
+
+<section class="destinations-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                PLACES WE VISITED
+            </span>
+
+            <h2>
+                Discover Kerala
+            </h2>
+
+            <p>
+                From mountains to beaches, every destination
+                had its own story.
+            </p>
+
+        </div>
+
+
+        <div class="destination-grid">
+
+            @foreach (var destination in destinations)
+            {
+                <div class="destination-home-card">
+
+                    <div class="destination-image">
+
+                        <img src="@destination.Image"
+                             alt="@destination.Name">
+
+                    </div>
+
+                    <div class="destination-content">
+
+                        <span>
+                            📍 @destination.Location
+                        </span>
+
+                        <h3>
+                            @destination.Name
+                        </h3>
+
+                        <p>
+                            @destination.Description
+                        </p>
+
+                        <a asp-controller="Journey"
+                           asp-action="Details"
+                           asp-route-id="@destination.Id">
+                            Explore →
+                        </a>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FINAL CTA
+     ========================= -->
+
+<section class="final-cta">
+
+    <div class="container">
+
+        <span>
+            READY TO EXPLORE?
+        </span>
+
+        <h2>
+            Come, experience Kerala with us.
+        </h2>
+
+        <p>
+            Explore every destination, every day
+            and every memory of our journey.
+        </p>
+
+        <div>
+
+            <a asp-controller="Journey"
+               asp-action="Itinerary"
+               class="hero-btn primary-btn">
+                🗓️ Start the Journey
+            </a>
+
+            <a asp-controller="Gallery"
+               asp-action="Index"
+               class="hero-btn secondary-btn">
+                📸 View Gallery
+            </a>
+
+        </div>
+
+    </div>
+
+</section>

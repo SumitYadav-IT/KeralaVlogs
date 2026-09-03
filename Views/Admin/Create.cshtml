@@ -1,0 +1,96 @@
+﻿@model KerlaVlogs.Models.Destination
+
+@{
+    ViewData["Title"] = "Add Destination";
+}
+
+<div class="container mt-5">
+
+    <h1 class="mb-4">Add Destination</h1>
+
+    <form asp-action="Create" method="post">
+
+        <div class="mb-3">
+
+            <label asp-for="Name" class="form-label">
+                Destination Name
+            </label>
+
+            <input asp-for="Name"
+                   class="form-control"
+                   placeholder="Example: Munnar" />
+
+        </div>
+
+
+        <div class="mb-3">
+
+            <label asp-for="Location" class="form-label">
+                Location
+            </label>
+
+            <input asp-for="Location"
+                   class="form-control"
+                   placeholder="Example: Idukki, Kerala" />
+
+        </div>
+
+
+        <div class="mb-3">
+
+            <label asp-for="Description" class="form-label">
+                Description
+            </label>
+
+            <textarea asp-for="Description"
+                      class="form-control"
+                      rows="5"
+                      placeholder="Write about your experience...">
+            </textarea>
+
+        </div>
+
+
+        <div class="mb-3">
+
+            <label asp-for="Image" class="form-label">
+                Image Path
+            </label>
+
+            <input asp-for="Image"
+                   class="form-control"
+                   placeholder="/images/munnar.jpeg" />
+
+        </div>
+
+
+        <div class="mb-3">
+
+            <label asp-for="PlacesVisited" class="form-label">
+                Places Visited
+            </label>
+
+            <input asp-for="PlacesVisited"
+                   class="form-control"
+                   placeholder="Tea Gardens, Waterfalls, View Point" />
+
+        </div>
+
+
+        <button type="submit"
+                class="btn btn-success">
+
+            Save Destination
+
+        </button>
+
+        <a asp-action="Index"
+           class="btn btn-secondary">
+
+            Cancel
+
+        </a>
+
+    </form>
+
+</div>

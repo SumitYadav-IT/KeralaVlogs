@@ -1,0 +1,93 @@
+﻿@model KerlaVlogs.Models.Destination
+
+@{
+    ViewData["Title"] = "Edit Destination";
+}
+
+<div class="container mt-5">
+
+    <h1 class="mb-4">Edit Destination</h1>
+
+    <form asp-action="Edit" method="post">
+
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+
+            <label asp-for="Name" class="form-label">
+                Destination Name
+            </label>
+
+            <input asp-for="Name"
+                   class="form-control" />
+
+        </div>
+
+
+        <div class="mb-3">
+
+            <label asp-for="Location" class="form-label">
+                Location
+            </label>
+
+            <input asp-for="Location"
+                   class="form-control" />
+
+        </div>
+
+
+        <div class="mb-3">
+
+            <label asp-for="Description" class="form-label">
+                Description
+            </label>
+
+            <textarea asp-for="Description"
+                      class="form-control"
+                      rows="5">
+            </textarea>
+
+        </div>
+
+
+        <div class="mb-3">
+
+            <label asp-for="Image" class="form-label">
+                Image Path
+            </label>
+
+            <input asp-for="Image"
+                   class="form-control" />
+
+        </div>
+
+
+        <div class="mb-3">
+
+            <label asp-for="PlacesVisited" class="form-label">
+                Places Visited
+            </label>
+
+            <input asp-for="PlacesVisited"
+                   class="form-control" />
+
+        </div>
+
+
+        <button type="submit"
+                class="btn btn-primary">
+
+            Update Destination
+
+        </button>
+
+        <a asp-action="Index"
+           class="btn btn-secondary">
+
+            Cancel
+
+        </a>
+
+    </form>
+
+</div>

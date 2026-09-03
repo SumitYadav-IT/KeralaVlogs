@@ -1,0 +1,118 @@
+﻿@{
+    ViewData["Title"] = "Admin Login";
+}
+
+<div class="login-page">
+
+    <div class="login-card">
+
+        <!-- LEFT SIDE -->
+        <div class="login-image">
+
+            <div class="login-overlay">
+
+                <div class="login-brand">
+                    🌴 Kerala Vlogs
+                </div>
+
+                <h2>
+                    Memories that<br />
+                    deserve to be remembered.
+                </h2>
+
+                <p>
+                    Manage your Kerala journey, photos,
+                    destinations and travel memories from one place.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+        <div class="login-form-section">
+
+            <div class="login-form">
+
+                <div class="login-icon">
+                    🔐
+                </div>
+
+                <h1>Welcome Back</h1>
+
+                <p class="login-subtitle">
+                    Sign in to access the admin dashboard
+                </p>
+
+
+                @if (ViewBag.Error != null)
+                {
+                    <div class="login-error">
+                        ⚠️ @ViewBag.Error
+                    </div>
+                }
+
+
+                <form asp-controller="Account"
+                      asp-action="Login"
+                      method="post">
+
+                    <div class="login-input-group">
+
+                        <label for="username">
+                            Email / Username
+                        </label>
+
+                        <input type="text"
+                               id="username"
+                               name="username"
+                               placeholder="admin@keralavlogs.com"
+                               autocomplete="username"
+                               required />
+
+                    </div>
+
+
+                    <div class="login-input-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <input type="password"
+                               id="password"
+                               name="password"
+                               placeholder="Enter your password"
+                               autocomplete="current-password"
+                               required />
+
+                    </div>
+
+
+                    <button type="submit"
+                            class="login-submit">
+
+                        Login to Dashboard
+                        <span>→</span>
+
+                    </button>
+
+                </form>
+
+
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   class="login-back">
+
+                    ← Back to Kerala Vlogs
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

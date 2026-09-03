@@ -1,0 +1,125 @@
+﻿
+@model KerlaVlogs.Models.Destination
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container mt-5">
+
+    <div class="text-center">
+
+        <h1>@Model.Name</h1>
+
+        <p class="lead">
+            @Model.Location
+        </p>
+
+    </div>
+
+
+    <div class="row mt-5">
+
+        <!-- Destination Image -->
+
+        <div class="col-md-7">
+
+            <img src="@Model.Image"
+                 class="img-fluid rounded journey-gallery-image"
+                 alt="@Model.Name"
+                 onclick="openLightbox('@Model.Image', '@Model.Name')" />
+
+        </div>
+
+
+        <!-- Destination Details -->
+
+        <div class="col-md-5">
+
+            <h2>My Experience</h2>
+
+            <p>
+                @Model.Description
+            </p>
+
+
+            <h3>Places We Visited</h3>
+
+            <ul>
+
+                @foreach (var place in Model.PlacesVisited.Split(','))
+                {
+                    <li>@place.Trim()</li>
+                }
+
+            </ul>
+
+
+            <!-- Buttons -->
+
+            <div class="mt-4">
+
+                <a asp-controller="Gallery"
+                   asp-action="Index"
+                   asp-route-destinationId="@Model.Id"
+                   class="btn btn-primary">
+
+                    📸 View Gallery
+
+                </a>
+
+
+                <a asp-controller="Journey"
+                   asp-action="Index"
+                   class="btn btn-secondary">
+
+                    ← Back to Journey
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Image Lightbox -->
+
+<div id="imageLightbox"
+     class="image-lightbox"
+     onclick="closeLightbox()">
+
+    <span class="lightbox-close">&times;</span>
+
+    <img id="lightboxImage"
+         src=""
+         alt="" />
+
+    <p id="lightboxCaption"></p>
+
+</div>
+
+
+<script>
+
+    function openLightbox(imagePath, caption) {
+
+        document.getElementById("lightboxImage").src = imagePath;
+
+        document.getElementById("lightboxCaption").innerText = caption;
+
+        document.getElementById("imageLightbox").classList.add("show");
+
+    }
+
+
+    function closeLightbox() {
+
+        document.getElementById("imageLightbox").classList.remove("show");
+
+    }
+
+</script>
